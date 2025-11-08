@@ -144,6 +144,34 @@ export const api = {
       console.error('Connection test failed:', error)
       return false
     }
+  },
+
+  /**
+   * Get all sessions for the sessions browser
+   */
+  async getSessions(): Promise<any> {
+    try {
+      const response = await apiClient.get('/sessions')
+      return response.data
+    } catch (error) {
+      console.error('Failed to fetch sessions:', error)
+      throw new Error('Failed to fetch sessions. Please try again.')
+    }
+  },
+
+  /**
+   * Get AI-powered name variants for multilingual search
+   */
+  async getNameVariants(searchTerm: string): Promise<any> {
+    try {
+      const response = await apiClient.post('/translate/variants', { 
+        search_term: searchTerm 
+      })
+      return response.data
+    } catch (error) {
+      console.error('Failed to get name variants:', error)
+      throw new Error('Failed to get name variants. Please try again.')
+    }
   }
 }
 

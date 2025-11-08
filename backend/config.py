@@ -4,7 +4,11 @@ Handles environment variables and application settings
 """
 
 from typing import List, Optional
-from pydantic import BaseSettings, Field
+try:
+    from pydantic_settings import BaseSettings
+except ImportError:
+    from pydantic import BaseSettings
+from pydantic import Field
 import os
 from pathlib import Path
 

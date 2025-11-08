@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Send, Bot, User, Settings, MessageSquare, Languages, Activity } from 'lucide-react'
+import { Send, Bot, User, Settings, MessageSquare, Languages, Activity, BookOpen, Moon, Sun } from 'lucide-react'
 import { cn, formatMessageTime, generateMessageId, detectLanguage } from './lib/utils'
 import { api, type ChatResponse } from './services/api'
+import SessionsPage from './components/SessionsPage'
 
 // Types
 interface Message {
@@ -22,6 +23,16 @@ interface Conversation {
   timestamp: Date
 }
 
+interface Session {
+  id: string
+  topic: string
+  speaker: string
+  date: string
+  content: string
+  sabha_type: string
+  themes: string[]
+}
+
 function App() {
   // State management
   const [conversations, setConversations] = useState<Conversation[]>([])
@@ -30,6 +41,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [currentPage, setCurrentPage] = useState<'chat' | 'sessions'>('chat')
+  const [darkMode, setDarkMode] = useState(false)
   
   // Refs
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -74,6 +87,16 @@ function App() {
     }
     setConversations(prev => [newConv, ...prev])
     setCurrentConversation(newConv.id)
+  }
+
+  // Navigate to sessions page
+  const goToSessions = () => {
+    setCurrentPage('sessions')
+  }
+
+  // Navigate back to chat
+  const goToChat = () => {
+    setCurrentPage('chat')
   }
 
   // Send message
@@ -167,6 +190,11 @@ function App() {
     }
   }
 
+  // Render sessions page if selected
+  if (currentPage === 'sessions') {
+    return <SessionsPage onBack={goToChat} />
+  }
+
   return (
     <div className="flex h-screen bg-background text-foreground">
       {/* Sidebar */}
@@ -231,12 +259,8 @@ function App() {
         {/* Footer */}
         <div className="p-4 border-t border-border">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Languages className="w-4 h-4" />
-            <span>Multi-language support</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-            <Activity className="w-4 h-4" />
-            <span>RAG-powered responses</span>
+            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+            <span className="font-medium">Akshar Yuvak Mandal</span>
           </div>
         </div>
       </div>
@@ -256,9 +280,25 @@ function App() {
               {currentConv?.title || 'Adhyatmik Intelligence AI'}
             </h2>
           </div>
-          <button className="p-2 hover:bg-accent rounded-lg transition-colors">
-            <Settings className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={goToSessions}
+              className="p-2 hover:bg-accent rounded-lg transition-colors"
+              title="Browse Sessions"
+            >
+              <BookOpen className="w-5 h-5" />
+            </button>
+            <button 
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-2 hover:bg-accent rounded-lg transition-colors"
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button className="p-2 hover:bg-accent rounded-lg transition-colors">
+              <Settings className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Messages */}
@@ -320,6 +360,24 @@ function App() {
                     {message.confidence && (
                       <div className="text-xs opacity-70 mt-1">
                         Confidence: {(message.confidence * 100).toFixed(1)}%
+                      </div>
+                    )}
+                    {message.sources && message.sources.length > 0 && (
+                      <div className="text-xs opacity-70 mt-2 border-t border-border/50 pt-2">
+                        <div className="font-medium mb-1">📚 Sources:</div>
+                        <div className="space-y-1">
+                          {message.sources.map((source, index) => (
+                            <div key={index} className="flex items-center gap-1">
+                              <span className="w-1 h-1 bg-current rounded-full flex-shrink-0" />
+                              <span>{source}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {message.processing_time && (
+                      <div className="text-xs opacity-50 mt-1">
+                        Processed in {message.processing_time.toFixed(2)}s
                       </div>
                     )}
                   </div>
@@ -388,6 +446,7 @@ function App() {
           )}
         </div>
       </div>
+
     </div>
   )
 }
