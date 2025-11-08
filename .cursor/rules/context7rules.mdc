@@ -1,0 +1,141 @@
+---
+alwaysApply: true
+---
+
+# Context7 Integration Rules
+
+## Automatic Context7 Usage
+
+**CRITICAL**: When the user asks about any of the following topics, ALWAYS use Context7 to get the most current and accurate information:
+
+### Framework & Library Documentation
+
+- When discussing React, Next.js, Vue, Angular, Svelte, or any JavaScript framework
+- When asking about Node.js, Express, Fastify, or backend frameworks
+- When working with Python frameworks (FastAPI, Django, Flask, Pydantic)
+- When using AI/ML libraries (LangChain, LangGraph, OpenAI SDK, Anthropic SDK)
+- When implementing RAG (Retrieval-Augmented Generation) systems
+- When working with vector databases (Pinecone, Weaviate, Chroma, FAISS)
+- When working with UI libraries (Tailwind CSS, Material-UI, Chakra UI, etc.)
+- When dealing with state management (Redux, Zustand, Jotai, etc.)
+- When using build tools (Vite, Webpack, Turbo, esbuild)
+
+### API & Service Integration
+
+- When integrating with third-party APIs (OpenAI, Anthropic, Stripe, Auth0, Firebase, etc.)
+- When working with cloud services (AWS, Vercel, Netlify, Cloudflare)
+- When setting up authentication systems
+- When configuring databases (MongoDB, PostgreSQL, Redis, etc.)
+- When working with ORMs (Prisma, Mongoose, TypeORM, SQLAlchemy, etc.)
+- When implementing document processing and embeddings
+- When setting up async/await patterns in Python or JavaScript
+
+### Development Tools & Configuration
+
+- When setting up linting (ESLint, Prettier, Biome)
+- When configuring TypeScript, testing frameworks (Jest, Vitest, Playwright)
+- When working with package managers (npm, yarn, pnpm, bun)
+- When setting up CI/CD pipelines
+- When configuring development environments
+
+### Code Examples & Implementation Patterns
+
+- When asking "how to implement", "show me an example", or "what's the best way to"
+- When requesting code snippets or boilerplate
+- When asking about best practices or current patterns
+- When troubleshooting framework-specific issues
+
+## Context7 Usage Instructions
+
+### For the AI Assistant:
+
+1. **Always append "use context7" to queries** when any of the above topics are mentioned
+2. **Be specific about versions** when known (e.g., "Next.js 14", "React 18")
+3. **Focus on current best practices** rather than outdated approaches
+4. **Prioritize official documentation** and established patterns
+
+### Query Enhancement Examples:
+
+- User asks: "How do I create a React component?"
+- Enhanced query: "How do I create a React functional component with TypeScript and modern hooks? use context7"
+
+- User asks: "Set up authentication"
+- Enhanced query: "How do I implement authentication in Next.js 14 with JWT and middleware? use context7"
+
+## When NOT to Use Context7
+
+- Basic programming concepts (loops, conditionals, data structures)
+- Language fundamentals (JavaScript basics, HTML/CSS basics)
+- Mathematical calculations or algorithms
+- General debugging that doesn't involve specific frameworks
+- File system operations or basic terminal commands
+
+## Project-Specific Context
+
+For this ChatBot-AYM project, automatically use Context7 when discussing:
+
+- Chatbot frameworks and libraries (LangChain, LangGraph, Rasa, etc.)
+- AI/ML integration patterns (OpenAI, Anthropic, local models)
+- RAG implementation (vector stores, embeddings, retrieval strategies)
+- FastAPI backend development and async patterns
+- Real-time messaging implementations
+- Authentication for chat applications
+- Database schemas for chat systems
+- WebSocket or Server-Sent Events setup
+- Modern chat UI patterns and components
+- Python async/await patterns and FastAPI best practices
+- Document processing and text chunking strategies
+
+## Quality Assurance
+
+When using Context7:
+
+1. **Verify information currency** - Ensure examples use current syntax
+2. **Check for deprecation warnings** - Avoid outdated methods
+3. **Provide working examples** - Test code snippets when possible
+4. **Include error handling** - Show robust implementation patterns
+5. **Follow security best practices** - Especially for authentication and data handling
+
+## Performance Considerations
+
+- Use Context7 for complex queries where accuracy is critical
+- Balance between getting current info and response speed
+- Cache frequently used patterns in project documentation
+- Prefer Context7 for rapidly evolving technologies over stable ones
+
+## Coding Best Practices & Safety Rules
+
+**CRITICAL**: Always follow these principles when providing code solutions:
+
+### Code Quality & Safety
+
+1. **Think Thoroughly**: Analyze the full context and implications before suggesting changes
+2. **Preserve Functionality**: Never break existing functionalities - always check dependencies
+3. **Best Practices**: Follow language-specific best practices and conventions
+4. **Error Handling**: Include proper error handling and validation
+5. **Security First**: Implement secure coding practices, especially for authentication and data handling
+6. **Performance Aware**: Consider performance implications of suggested changes
+
+### Implementation Guidelines
+
+1. **Incremental Changes**: Suggest small, testable changes rather than large refactors
+2. **Backward Compatibility**: Ensure changes don't break existing integrations
+3. **Documentation**: Include clear comments and docstrings for complex logic
+4. **Testing Considerations**: Mention testing strategies for new implementations
+5. **Dependency Management**: Be mindful of adding new dependencies
+
+### Python/FastAPI Specific
+
+1. **Async/Await**: Use proper async patterns for I/O operations
+2. **Type Hints**: Include comprehensive type hints with Pydantic models
+3. **Exception Handling**: Use FastAPI's HTTPException for API errors
+4. **Dependency Injection**: Leverage FastAPI's dependency injection system
+5. **Data Validation**: Use Pydantic for request/response validation
+
+### AI/ML & RAG Specific
+
+1. **Token Management**: Be mindful of token limits and costs
+2. **Embedding Efficiency**: Optimize vector operations and storage
+3. **Context Window**: Manage context window limits effectively
+4. **Fallback Strategies**: Implement fallbacks for AI service failures
+5. **Data Privacy**: Ensure sensitive data handling in RAG pipelines
